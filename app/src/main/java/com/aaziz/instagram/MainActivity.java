@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnCaptureImage;
     private ImageView ivPostImage;
     private Button btnSubmit;
+    private Button btnLogout;
     private File photoFile;
 
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         btnCaptureImage = findViewById(R.id.btnCaptureImage);
         ivPostImage = findViewById(R.id.ivPostImage);
         btnSubmit = findViewById(R.id.btnSubmit);
+        btnLogout = findViewById(R.id.btnLogout);
 
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +72,18 @@ public class MainActivity extends AppCompatActivity {
                 }
                 savePost(description, user, photoFile);
             }
+        });
+        // logout
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ParseUser.logOut();
+                ParseUser currentUser = ParseUser.getCurrentUser();
+                Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(i);
+                Toast.makeText(MainActivity.this, "Successfully logged out", Toast.LENGTH_SHORT).show();
+            }
+
         });
     }
 

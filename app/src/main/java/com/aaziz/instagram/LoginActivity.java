@@ -26,15 +26,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        if (currentUser != null) {
-            // do stuff with the user
-            goMainActivity();
-        } else {
-            // show the signup or login screen
-            return;
-        }
-
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
@@ -46,7 +37,14 @@ public class LoginActivity extends AppCompatActivity {
                 login (username, password);
             }
         });
-
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            // do stuff with the user
+            goMainActivity();
+        } else {
+            // show the signup or login screen
+            return;
+        }
     }
 
 
